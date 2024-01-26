@@ -1,0 +1,133 @@
+h1,
+h2,
+h3 {
+  @apply font-bold;
+  @apply text-lg;
+}
+h1,
+.h1 {
+  @apply text-xl !important;
+}
+a.hyperlink:hover {
+  @apply text-primary underline;
+}
+
+/* ini akan membuat antar header ada spasi, kecuali header paling atas */
+.module-detail > * + :where(h1, h2) {
+  @apply mt-10 mb-6;
+}
+
+.shell {
+  &-body {
+    height: calc(100vh - 5rem);
+  }
+  &-container {
+    @apply h-screen;
+    main {
+      @apply p-0 bg-white min-h-0;
+      & > div:first-child {
+        @apply h-full;
+      }
+    }
+  }
+}
+.header {
+  @apply h-16 max-h-20;
+}
+.sidebar {
+  height: calc(100vh - 4rem);
+  ul {
+    @apply flex flex-col gap-2;
+  }
+  &-menu {
+    @apply flex flex-row p-2 rounded-lg;
+  }
+}
+
+.table {
+  td:first-child {
+    @apply pl-4;
+  }
+  &:not(.table-with-action) td:last-child {
+    @apply pr-4;
+  }
+  &-with-action {
+    .table-header td {
+      &:last-child,
+      &:nth-last-child(2) {
+        @apply w-[42px] text-center;
+      }
+    }
+    .table-header td {
+      &:last-child,
+      &:nth-last-child(2) {
+        @apply !px-0 text-center;
+      }
+    }
+  }
+  @apply text-dark;
+  &-btn-delete {
+    @apply w-full h-full bg-primary absolute top-0 text-white right-0 flex flex-row items-center justify-center;
+  }
+  &-header {
+    @apply text-xs text-secondary bg-gray-50 h-10 rounded-t-md overflow-hidden;
+    td {
+      @apply bg-gray-50 text-secondary px-2 whitespace-nowrap text-sm;
+    }
+  }
+  &-body,
+  &-footer {
+    td {
+      @apply px-2 !border-[#f5f5f5];
+      height: 70px;
+    }
+    &.table-border td:not(:first-child) {
+      border-left-style: solid;
+      border-left-width: 1px;
+    }
+  }
+}
+.table-compact .table-body td,
+.table-compact .table-footer td {
+  height: 43px;
+}
+
+.table-module-detail {
+  @apply -mt-4;
+  tr {
+    @apply h-12;
+    td:first-child {
+      @apply text-secondary whitespace-nowrap w-[1%] pr-6 min-w-[160px];
+    }
+  }
+}
+
+td.editable {
+  @apply focus-visible:outline-none focus-within:shadow shadow-dark !p-0 relative focus-within:z-10;
+  input {
+    @apply focus-visible:outline-none border-none;
+  }
+}
+.table-compact .editable {
+  input {
+    @apply min-h-[47px];
+  }
+}
+td.delete-action {
+  @apply relative !border-t-transparent;
+  button {
+    @apply absolute -left-2 h-full top-0;
+  }
+}
+
+.sticky-header {
+  @apply sticky top-0 bg-white p-2 z-[11] -mx-2 -mb-2;
+}
+.module-detail .sticky-header {
+  @apply -mb-5;
+}
+
+.mantine-AppShell-main {
+  min-height: 0px !important;
+  padding-top: 1rem !important;
+}
