@@ -36,9 +36,19 @@ const CustomEventComponent: React.FC<CustomEventComponentProps> = ({ event, onMo
     const isAfter9AM = eventTime > nineAM;
     
     return (
-        <div className={`cursor-pointer ${event.desc === 'Cuti' ? 'bg-yellow-300' : isAfter9AM ? 'bg-red-300' : 'bg-green-300'} rounded px-2 py-[2px] `}>
-        <Text fw={500} size="sm">{event.title}</Text>
-        <Text fw={700} size="sm">{event.desc}</Text>
+        <div className={`cursor-pointer ${event.desc === 'Cuti' ? 'bg-yellow-300' : event.desc === 'Libur' ? 'bg-pink-300' : isAfter9AM ? 'bg-red-300' : 'bg-green-300'} rounded px-2 py-[2px] `}>
+            {
+                (event.desc === 'Cuti' || event.desc === 'Libur') ? (
+                    <>
+                        <Text fw={700} size="sm">{event.desc}</Text>
+                    </>
+                ) : (
+                    <>
+                        <Text fw={500} size="sm">{event.title}</Text>
+                        <Text fw={700} size="sm">{event.desc}</Text>
+                    </>
+                )
+            }
         </div>
     );
 };
@@ -52,7 +62,7 @@ export default function CustomCalendar() {
   const dummyData = [
         {
             id: 1,
-            title: dayjs("2024-01-19T01:37:05.637Z").format('H:mm'),
+            title: dayjs("2024-01-19T00:00:00.000Z").format('H:mm'),
             allDay: true,
             start: new Date(2024, 0, 1),
             end: new Date(2024, 0, 1),
@@ -60,7 +70,7 @@ export default function CustomCalendar() {
         },
         {
             id: 2,
-            title: dayjs("2024-01-19T01:50:05.637Z").format('H:mm'),
+            title: dayjs("2024-01-19T00:00:00.000Z").format('H:mm'),
             start: new Date(2024, 0, 2),
             end: new Date(2024, 0, 2),
             desc: 'Cuti'

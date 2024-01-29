@@ -2,20 +2,25 @@
 
 import { useRouter } from "next/navigation";
 import Datatable from "shared/components/datatable/Datatable";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, TextInput } from "@mantine/core";
 import Download from "@/icons/Download";
 import { DateInput, DateValue } from "@mantine/dates";
 import dayjs from "dayjs";
+import DatatableMenu from "@/shared/components/datatable/DataTableMenu";
+import { Employee } from "@/shared/@types";
+import Modal, { ModalRef } from "@/shared/components/Modal";
+import ModalShowEmployee from "../components/ModalShowEmployee";
 
 export default function EmployeeList() {
   const router = useRouter()
 
   const openCreateView = () => router.push("/admin/customer");
-  // const openShowView = (admin: Admin) => router.push(`/admin/${admin.id}`);
+  const [employeeClicked, setEmployeeClicked] = useState<Employee>()
 
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const modalShowEmployee = useRef<ModalRef>(null);
 
   const onChangeDate = (start: boolean) => (value: DateValue) => {
     // Update the state with the selected date
@@ -95,6 +100,10 @@ export default function EmployeeList() {
 
   return (
     <div className="flex flex-col gap-6">
+      <Modal ref={modalShowEmployee}>
+        {employeeClicked && <ModalShowEmployee employee={employeeClicked} />}
+      </Modal>
+
       <div className="inline-flex gap-4 flex-col">
         <div className="w-full flex flex-col md:flex-row gap-4">
           <div className="w-full md:w-52">
@@ -120,10 +129,14 @@ export default function EmployeeList() {
           </div>
         </div>
       </div>
-      <Datatable
+      <DatatableMenu
         title={["Employee", "Employee"]}
+        tableName="Employee"
         data={dummyData || []}
-        // onRowClick={openShowView}
+        onRowClick={(value) => {
+          setEmployeeClicked(value)
+          modalShowEmployee.current?.openModal()
+        }}
         columns={[
           {
             key: "name",

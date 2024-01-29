@@ -22,6 +22,8 @@ export * from "./log"
 export * from "./eventlog"
 export * from './attendance'
 export * from './request'
+export * from './employee'
+export * from './permission'
 
 export type NestedPartial<T> = {
   [K in keyof T]?: T[K] extends any ? NestedPartial<T[K]> : T[K];

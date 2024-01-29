@@ -12,10 +12,10 @@ interface ProfileCardProps {
 }
 
 const ProfileCard: React.FC<ProfileCardProps> = ({ name, role, email, phone, avatarSrc }) => (
-  <Group wrap="nowrap" className="flex bg-slate-500 rounded-xl p-4 w-full md:w-fit">
+  <Group wrap="nowrap">
     <Avatar src={avatarSrc} size={94} radius="md" />
     <div>
-      <Text fz="lg" fw={700}>
+      <Text fz="lg" fw={700} c="white">
         {name}
       </Text>
 

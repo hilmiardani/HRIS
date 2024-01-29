@@ -11,6 +11,7 @@ import { deepClone } from "@/shared/utils";
 import { TextInput } from "@mantine/core";
 import Modal, { ModalRef } from "@/shared/components/Modal";
 import ModalShowAdmin from "../components/ModalShowAdmin";
+import DatatableMenu from "@/shared/components/datatable/DataTableMenu";
 
 export default function AdminList() {
   const router = useRouter();
@@ -95,8 +96,9 @@ export default function AdminList() {
           />
         }
       />
-      <Datatable
+      <DatatableMenu
         title={["Admin", "Admin"]}
+        tableName="Admin"
         data={dummyData || []}
         onRowClick={(value) => {
           setAdminClicked(value)

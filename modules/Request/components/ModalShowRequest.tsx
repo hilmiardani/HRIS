@@ -13,16 +13,20 @@ const ModalShowRequest = ({ request }: { request: RequestLeave }) => {
             <Table.Td className='!p-4'>{request.day}</Table.Td>
           </Table.Tr>
           <Table.Tr>
-            <Table.Td className='whitespace-nowrap !p-0 font-bold'>Date</Table.Td>
-            <Table.Td className='!p-4'>{request.date}</Table.Td>
+            <Table.Td className='whitespace-nowrap !p-0 font-bold'>Start Date</Table.Td>
+            <Table.Td className='!p-4'>{request.startDate}</Table.Td>
+          </Table.Tr>
+          <Table.Tr>
+            <Table.Td className='whitespace-nowrap !p-0 font-bold'>End Date</Table.Td>
+            <Table.Td className='!p-4'>{request.endDate}</Table.Td>
           </Table.Tr>
           <Table.Tr>
             <Table.Td className='whitespace-nowrap !p-0 font-bold'>Request</Table.Td>
-            <Table.Td className='!p-4'>{request.request}</Table.Td>
+            <Table.Td className='!p-4'>{request.type}</Table.Td>
           </Table.Tr>
           <Table.Tr>
             <Table.Td className='whitespace-nowrap !p-0 font-bold'>Description</Table.Td>
-            <Table.Td className='!p-4'>{request.desc}</Table.Td>
+            <Table.Td className={`!p-4 ${request.desc === 'Acc' ? 'text-green-500' : request.desc === 'Pending' ? 'text-orange-500' : ''}`}>{request.desc}</Table.Td>
           </Table.Tr>
         </Table.Tbody>
       </Table>

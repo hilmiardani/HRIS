@@ -2,7 +2,6 @@
 
 import DatatableHeader from "shared/components/datatable/DatatableHeader";
 import { useRouter } from "next/navigation";
-import Datatable from "shared/components/datatable/Datatable";
 import { Attendance } from "@/shared/@types";
 import { useApiHandler } from "@/shared/hooks";
 import { API_getAllAdmin } from "@/shared/apis";
@@ -11,6 +10,7 @@ import { deepClone } from "@/shared/utils";
 import { TextInput } from "@mantine/core";
 import Modal, { ModalRef } from "@/shared/components/Modal";
 import ModalShowAttendance from "../components/ModalShowAttendance";
+import DatatableMenu from "@/shared/components/datatable/DataTableMenu";
 
 export default function AttendanceList() {
   const router = useRouter();
@@ -181,17 +181,38 @@ export default function AttendanceList() {
       desc: 'Hadir',
     },
     {
-      id: '19',
+      id: '21',
       day: 'Rabu',
       date: '24 January 2024',
       time: '8:23',
       desc: 'Hadir',
     },
     {
-      id: '19',
+      id: '22',
       day: 'Kamis',
       date: '25 January 2024',
       time: '8:43',
+      desc: 'Hadir',
+    },
+    {
+      id: '23',
+      day: 'Jumat',
+      date: '26 January 2024',
+      time: '8:40',
+      desc: 'Hadir',
+    },
+    {
+      id: '24',
+      day: 'Sabtu',
+      date: '27 January 2024',
+      time: '8:20',
+      desc: 'Hadir',
+    },
+    {
+      id: '25',
+      day: 'Senin',
+      date: '28 January 2024',
+      time: '8:48',
       desc: 'Hadir',
     }
   ]
@@ -213,8 +234,9 @@ export default function AttendanceList() {
           />
         }
       />
-      <Datatable
+      <DatatableMenu
         title={["Attendance", "Attendance"]}
+        tableName="Attendance"
         data={dummyData || []}
         onRowClick={(value) => {
           setAttendanceClicked(value)
