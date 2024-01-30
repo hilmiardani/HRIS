@@ -1,5 +1,5 @@
 "use client";
-import React, { Children, useState } from 'react';
+import React, { Children, useRef, useState } from 'react';
 import { Calendar, Formats, dayjsLocalizer } from 'react-big-calendar';
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import dayjs from 'dayjs';
@@ -10,10 +10,13 @@ import { Button, Text } from '@mantine/core';
 import { ContextMenuItem, useContextMenu } from 'use-context-menu';
 import ModalAddDispute from '../components/ModalAddDispute';
 import { API_addDisputeInput } from '@/shared/apis/calendar/addDispute';
+import Modal, { ModalRef } from '@/shared/components/Modal';
+import ModalDetailCalendar from '../components/ModalDetailCalendar';
+import { Absence } from '@/shared/@types';
 
 interface CustomEventComponentProps {
   event: {
-    id: number;
+    id: string;
     title: string;
     start: Date;
     end: Date;
@@ -59,9 +62,11 @@ export default function CustomCalendar() {
   const [addPermissionModal, setAddPermissionModal] = useState(false);
   const [addDisputeModal, setAddDisputeModal] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(now);
+  const modalDetailCalendar = useRef<ModalRef>(null);
+  const [absenceClicked, setAbsenceClicked] = useState<Absence>()
   const dummyData = [
         {
-            id: 1,
+            id: '1',
             title: dayjs("2024-01-19T00:00:00.000Z").format('H:mm'),
             allDay: true,
             start: new Date(2024, 0, 1),
@@ -69,189 +74,189 @@ export default function CustomCalendar() {
             desc: 'Libur'
         },
         {
-            id: 2,
+            id: '2',
             title: dayjs("2024-01-19T00:00:00.000Z").format('H:mm'),
             start: new Date(2024, 0, 2),
             end: new Date(2024, 0, 2),
             desc: 'Cuti'
         },
         {
-            id: 3,
+            id: '3',
             title: dayjs("2024-01-19T01:15:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 3),
             end: new Date(2024, 0, 3),
             desc: 'Hadir'
         },
         {
-            id: 4,
+            id: '4',
             title: dayjs("2024-01-19T01:00:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 4),
             end: new Date(2024, 0, 4),
             desc: 'Hadir'
         },
         {
-            id: 5,
+            id: '5',
             title: dayjs("2024-01-19T00:15:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 5),
             end: new Date(2024, 0, 5),
             desc: 'Hadir'
         },
         {
-            id: 6,
+            id: '6',
             title: dayjs("2024-01-19T00:20:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 6),
             end: new Date(2024, 0, 6),
             desc: 'Hadir'
         },
         {
-            id: 7,
+            id: '7',
             title: dayjs("2024-01-19T02:15:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 8),
             end: new Date(2024, 0, 8),
             desc: 'Hadir'
         },
         {
-            id: 8,
+            id: '8',
             title: dayjs("2024-01-19T00:45:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 9),
             end: new Date(2024, 0, 9),
             desc: 'Hadir'
         },
         {
-            id: 9,
+            id: '9',
             title: dayjs("2024-01-19T01:15:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 10),
             end: new Date(2024, 0, 10),
             desc: 'Hadir'
         },
         {
-            id: 10,
+            id: '10',
             title: dayjs("2024-01-19T01:32:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 11),
             end: new Date(2024, 0, 11),
             desc: 'Hadir'
         },
         {
-            id: 11,
+            id: '11',
             title: dayjs("2024-01-19T01:31:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 12),
             end: new Date(2024, 0, 12),
             desc: 'Hadir'
         },
         {
-            id: 12,
+            id: '12',
             title: dayjs("2024-01-19T01:23:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 13),
             end: new Date(2024, 0, 13),
             desc: 'Hadir'
         },
         {
-            id: 13,
+            id: '13',
             title: dayjs("2024-01-19T01:26:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 15),
             end: new Date(2024, 0, 15),
             desc: 'Hadir'
         },
         {
-            id: 14,
+            id: '14',
             title: dayjs("2024-01-19T01:28:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 16),
             end: new Date(2024, 0, 16),
             desc: 'Hadir'
         },
         {
-            id: 15,
+            id: '15',
             title: dayjs("2024-01-19T01:38:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 17),
             end: new Date(2024, 0, 17),
             desc: 'Hadir'
         },
         {
-            id: 16,
+            id: '16',
             title: dayjs("2024-01-19T01:21:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 18),
             end: new Date(2024, 0, 18),
             desc: 'Hadir'
         },
         {
-            id: 17,
+            id: '17',
             title: dayjs("2024-01-19T01:20:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 19),
             end: new Date(2024, 0, 19),
             desc: 'Hadir'
         },
         {
-            id: 18,
+            id: '18',
             title: dayjs("2024-01-19T01:11:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 20),
             end: new Date(2024, 0, 20),
             desc: 'Hadir'
         },
         {
-            id: 19,
+            id: '19',
             title: dayjs("2024-01-19T01:13:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 22),
             end: new Date(2024, 0, 22),
             desc: 'Hadir'
         },
         {
-            id: 20,
+            id: '20',
             title: dayjs("2024-01-19T01:15:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 23),
             end: new Date(2024, 0, 23),
             desc: 'Hadir'
         },
         {
-            id: 21,
+            id: '21',
             title: dayjs("2024-01-19T00:26:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 24),
             end: new Date(2024, 0, 24),
             desc: 'Hadir'
         },
         {
-            id: 22,
+            id: '22',
             title: dayjs("2024-01-19T00:45:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 25),
             end: new Date(2024, 0, 25),
             desc: 'Hadir'
         },
         {
-            id: 23,
+            id: '23',
             title: dayjs("2024-01-19T00:50:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 26),
             end: new Date(2024, 0, 26),
             desc: 'Hadir'
         },
         {
-            id: 24,
+            id: '24',
             title: dayjs("2024-01-19T01:15:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 27),
             end: new Date(2024, 0, 27),
             desc: 'Hadir'
         },
         {
-            id: 25,
+            id: '25',
             title: dayjs("2024-01-19T01:07:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 29),
             end: new Date(2024, 0, 29),
             desc: 'Hadir'
         },
         {
-            id: 26,
+            id: '26',
             title: dayjs("2024-01-19T01:05:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 30),
             end: new Date(2024, 0, 30),
             desc: 'Hadir'
         },
         {
-            id: 27,
+            id: '27',
             title: dayjs("2024-01-19T01:15:05.637Z").format('H:mm'),
             start: new Date(2024, 0, 31),
             end: new Date(2024, 0, 31),
             desc: 'Hadir'
         },
         {
-            id: 28,
+            id: '28',
             title: dayjs("2024-01-19T01:27:05.637Z").format('H:mm'),
             start: new Date(2024, 1, 1),
             end: new Date(2024, 1, 1),
@@ -267,7 +272,7 @@ export default function CustomCalendar() {
       setEventsData([
         ...eventsData,
         {
-          id: Math.random(),
+          id: Math.floor(Math.random() * 1000000).toString(),
           start,
           end,
           title,
@@ -412,6 +417,9 @@ export default function CustomCalendar() {
 
   return (
     <div className="p-4 flex flex-col gap-6">
+        <Modal ref={modalDetailCalendar}>
+            {absenceClicked && <ModalDetailCalendar absence={absenceClicked} />}
+        </Modal>
         <ModalAddPermission
             opened={addPermissionModal}
             setOpened={setAddPermissionModal}
@@ -436,7 +444,11 @@ export default function CustomCalendar() {
             endAccessor="end"
             selectable
             style={{ height: 500 }}
-            onSelectEvent={(event) => alert(event.title)}
+            // onSelectEvent={(event) => alert(event.desc)}
+            onSelectEvent={(event) => {
+                setAbsenceClicked(event)
+                modalDetailCalendar.current?.openModal()
+            }}
             onSelectSlot={handleSelect}
             components={{
                 toolbar: (props) => <CustomToolbar {...props} />,

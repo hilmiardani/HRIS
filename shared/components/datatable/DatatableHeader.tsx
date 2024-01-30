@@ -11,7 +11,7 @@ interface DatatableHeaderProp {
 export default function DatatableHeader({ onSearch = () => { }, title, onCreate = () => { }, leftSection, addButton = true }: DatatableHeaderProp) {
   return <>
     <h1>{title}</h1>
-    <div className="flex gap-4 sticky-header justify-between " >
+    <div className={`flex ${addButton ? 'gap-4' : '' } sticky-header justify-between`} >
       <div className="flex w-full">
         {leftSection &&
           leftSection

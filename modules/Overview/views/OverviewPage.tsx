@@ -40,14 +40,16 @@ export default function Overview() {
 
   return (
     <div className="p-4 flex flex-col gap-6">
-      <div className="bg-slate-500 w-fit rounded-xl p-4">
-        <ProfileCard
-          name="Gus Abdul Majid S.Pd M.Mk"
-          role="SENIOR KJHL NI BOS"
-          email="abdoelganteng@kjhl.ac.id"
-          phone="+62 896 0820 7601"
-          avatarSrc="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-2.png"
-        />
+      <div className="flex justify-center">
+        <div className="bg-slate-500 w-fit rounded-xl p-4">
+          <ProfileCard
+            name="Gus Abdul Majid S.Pd M.Mk"
+            role="SENIOR KJHL NI BOS"
+            email="abdoelganteng@kjhl.ac.id"
+            phone="+62 896 0820 7601"
+            avatarSrc="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-2.png"
+          />
+        </div>
       </div>
       <div className="inline-flex gap-4 flex-col">
         {/* <div className="w-full flex flex-col md:flex-row gap-4">

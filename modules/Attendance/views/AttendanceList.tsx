@@ -11,9 +11,12 @@ import { TextInput } from "@mantine/core";
 import Modal, { ModalRef } from "@/shared/components/Modal";
 import ModalShowAttendance from "../components/ModalShowAttendance";
 import DatatableMenu from "@/shared/components/datatable/DataTableMenu";
+import { MonthPickerInput } from "@mantine/dates";
+import dayjs, { Dayjs } from "dayjs";
 
 export default function AttendanceList() {
   const router = useRouter();
+  const [date, setDate] = useState<Dayjs>(dayjs().startOf('month'))
   const { data, fetch, loadMore, setInput, input } = useApiHandler(API_getAllAdmin, { silence: false, eager: true })
 
   const [attendanceClicked, setAttendanceClicked] = useState<Attendance>()
@@ -214,6 +217,20 @@ export default function AttendanceList() {
       date: '28 January 2024',
       time: '8:48',
       desc: 'Hadir',
+    },
+    {
+      id: '26',
+      day: 'Selasa',
+      date: '29 January 2024',
+      time: '8:40',
+      desc: 'Hadir',
+    },
+    {
+      id: '27',
+      day: 'Rabu',
+      date: '30 January 2024',
+      time: '8:50',
+      desc: 'Hadir',
     }
   ]
 
@@ -233,6 +250,12 @@ export default function AttendanceList() {
             onChange={(e) => onChangeSearch(e)}
           />
         }
+      />
+      <MonthPickerInput
+        className="w-full md:w-48"
+        value={date.toDate()}
+        valueFormat="MMMM YYYY"
+        onChange={(e: Date) => setDate(dayjs(e))}
       />
       <DatatableMenu
         title={["Attendance", "Attendance"]}
