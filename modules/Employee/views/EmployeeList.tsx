@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import Datatable from "shared/components/datatable/Datatable";
 import { useEffect, useRef, useState } from "react";
-import { Button, TextInput } from "@mantine/core";
+import { Button, Text, TextInput } from "@mantine/core";
 import Download from "@/icons/Download";
 import { DateInput, DateValue } from "@mantine/dates";
 import dayjs from "dayjs";
@@ -87,15 +87,9 @@ export default function EmployeeList() {
     },
   ]
 
-  useEffect(() => {
-    const today = new Date();
-    
-    // Set startDate to today
-    setStartDate(dayjs(today).format('YYYY-MM-DD'));
-
-    // Set endDate to +1 month from startDate
-    const nextMonth = dayjs(today).add(1, 'month');
-    setEndDate(nextMonth.format('YYYY-MM-DD'));
+  useEffect(() => {    
+    setStartDate(dayjs().startOf('month').format('YYYY-MM-DD'));
+    setEndDate(dayjs().endOf('month').format('YYYY-MM-DD'));
   }, []);
 
   return (
@@ -105,6 +99,7 @@ export default function EmployeeList() {
       </Modal>
 
       <div className="inline-flex gap-4 flex-col">
+        <Text fw={700}>Employee Attendance</Text>
         <div className="w-full flex flex-col md:flex-row gap-4">
           <div className="w-full md:w-52">
             <DateInput

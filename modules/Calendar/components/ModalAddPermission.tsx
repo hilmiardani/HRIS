@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, FileInput, Select, Text, TextInput, Textarea } from "@mantine/core";
 import ModalGlobal from "@/shared/components/modal/ModalGlobal";
 import { API_addPermissionInput, ApiAddPermissionInputSchema } from "@/shared/apis";
-import { DateInput, DateValue } from "@mantine/dates";
+import { DateInput, DateValue, DatesProvider } from "@mantine/dates";
 import dayjs from "dayjs";
 
 interface ModalAddPermissionProps {
@@ -52,14 +52,16 @@ export const ModalAddPermission = ({ opened, setOpened, onSave, onCancel }: Moda
       classNames={{ content: "!overflow-y-visible" }}
     >
       <div className="flex flex-col gap-2">
-        <DateInput
-            label="Start Date"
-            placeholder="Start Date"
-            value={input?.startDate ? dayjs(input?.startDate, 'YYYY-MM-DD').toDate() : undefined}
-            onChange={onChangeDate(true)}
-            className="w-auto whitespace-nowrap"
-            valueFormat="D MMM YYYY"
-        />
+        <DatesProvider settings={{ locale: 'id', firstDayOfWeek: 1, weekendDays: [0], timezone: 'UTC+7' }}>
+          <DateInput
+              label="Start Date"
+              placeholder="Start Date"
+              value={input?.startDate ? dayjs(input?.startDate, 'YYYY-MM-DD').toDate() : undefined}
+              onChange={onChangeDate(true)}
+              className="w-auto whitespace-nowrap"
+              valueFormat="D MMM YYYY"
+          />
+        </DatesProvider>
         <DateInput
             label="End Date"
             placeholder="End Date"

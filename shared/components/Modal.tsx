@@ -42,9 +42,11 @@ const Modal: ForwardRefRenderFunction<ModalRef,
       centered={true}
       size={largeModal ? '60%' : undefined}
     >
-      <button className="absolute right-4 top-4 z-10" onClick={handleClose}>
-        <Close className="w-4" />
-      </button>
+      <div className="bg-red-500 justify-center">
+        <button className="absolute right-4 top-6 z-10" onClick={handleClose}>
+          <Close className="w-4" />
+        </button>
+      </div>
       {children}
     </MantineModal>
   );

@@ -3,11 +3,10 @@ import ProfileCard from "@/components/Global/Card/ProfileCard";
 import { API_getOverview, ApiGetOverviewInputSchema } from "@/shared/apis/overview/getOverview";
 import { useApiHandler } from "@/shared/hooks";
 import { ribu } from "@/shared/support/formater";
-import { Avatar, Grid, Group, Text } from "@mantine/core";
-import { DateInput, DateValue } from "@mantine/dates";
-import { IconAt, IconPhoneCall } from "@tabler/icons-react";
+import { Grid, Text } from "@mantine/core";
+import { DateValue } from "@mantine/dates";
 import dayjs, { Dayjs } from "dayjs";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface DateState {
   start?: Dayjs,
@@ -41,7 +40,7 @@ export default function Overview() {
   return (
     <div className="p-4 flex flex-col gap-6">
       <div className="flex justify-center">
-        <div className="bg-slate-500 w-fit rounded-xl p-4">
+        <div className="bg-emerald-500 w-fit rounded-xl p-4">
           <ProfileCard
             name="Gus Abdul Majid S.Pd M.Mk"
             role="SENIOR KJHL NI BOS"
@@ -83,43 +82,43 @@ export default function Overview() {
         </Grid.Col>
         <Grid.Col span={{ md: 6, xs: 12 }}>
           <div className="flex flex-row gap-2">
-            <Text fz="md">1</Text>
+            <Text fz="md" className="!text-green-500">1</Text>
             <Text fz="md">Attendance</Text>
           </div>
         </Grid.Col>
         <Grid.Col span={{ md: 6, xs: 12 }}>
           <div className="flex flex-row gap-2">
-            <Text fz="md">12</Text>
+            <Text fz="md" className="!text-amber-500">12</Text>
             <Text fz="md">Absence Remaining</Text>
           </div>
         </Grid.Col>
         <Grid.Col span={{ md: 6, xs: 12 }}>
           <div className="flex flex-row gap-2">
-            <Text fz="md">0</Text>
+            <Text fz="md" className="!text-red-500">0</Text>
             <Text fz="md">Late</Text>
           </div>
         </Grid.Col>
         <Grid.Col span={{ md: 6, xs: 12 }}>
           <div className="flex flex-row gap-2">
-            <Text fz="md">1</Text>
+            <Text fz="md" className="!text-orange-500">1</Text>
             <Text fz="md">Pending Absence Request</Text>
           </div>
         </Grid.Col>
         <Grid.Col span={{ md: 6, xs: 12 }}>
           <div className="flex flex-row gap-2">
-            <Text fz="md">1</Text>
+            <Text fz="md" className="!text-yellow-500">1</Text>
             <Text fz="md">Sick Leave</Text>
           </div>
         </Grid.Col>
         <Grid.Col span={{ md: 6, xs: 12 }}>
           <div className="flex flex-row gap-2">
-            <Text fz="md">1</Text>
+            <Text fz="md" className="!text-indigo-500">1</Text>
             <Text fz="md">Pending Dispute</Text>
           </div>
         </Grid.Col>
         <Grid.Col span={{ md: 12, xs: 12 }}>
           <div className="flex flex-row gap-2">
-            <Text fz="md">1</Text>
+            <Text fz="md" className="!text-red-500">1</Text>
             <Text fz="md">Absence</Text>
           </div>
         </Grid.Col>

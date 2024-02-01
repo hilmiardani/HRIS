@@ -257,10 +257,10 @@ export default function CustomCalendar() {
         },
         {
             id: '28',
-            title: dayjs("2024-01-19T01:27:05.637Z").format('H:mm'),
+            title: dayjs("2024-01-19T01:47:05.637Z").format('H:mm'),
             start: new Date(2024, 1, 1),
             end: new Date(2024, 1, 1),
-            desc: 'Cuti'
+            desc: 'Hadir'
         },
     ]
 
@@ -416,7 +416,7 @@ export default function CustomCalendar() {
   );
 
   return (
-    <div className="p-4 flex flex-col gap-6">
+    <div className="flex flex-col gap-6">
         <Modal ref={modalDetailCalendar}>
             {absenceClicked && <ModalDetailCalendar absence={absenceClicked} />}
         </Modal>
@@ -438,12 +438,12 @@ export default function CustomCalendar() {
         </div>
         <Calendar
             localizer={localizer}
-            //events={eventsData}
-            events={filteredEvents}
+            events={eventsData}
+            // events={filteredEvents}
             startAccessor="start"
             endAccessor="end"
             selectable
-            style={{ height: 500 }}
+            style={{ height: 550 }}
             // onSelectEvent={(event) => alert(event.desc)}
             onSelectEvent={(event) => {
                 setAbsenceClicked(event)
